@@ -1,0 +1,38 @@
+{
+  "name": "radishpit",
+  "description": "",
+  "version": "0.3.14",
+  "license": "MIT",
+  "repository": "",
+  "main": "./dist/index.js",
+  "module": "./dist/index.es.js",
+  "dependencies": {
+    "kind-of": "^6.0.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.3",
+    "babel-plugin-dev-expression": "^0.2.1",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-latest": "^6.24.1",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-html": "^4.0.3",
+    "eslint-plugin-import": "^2.11.0",
+    "mocha": "^5.1.1",
+    "rollup-plugin-babel": "^3.0.4",
+    "rollup-plugin-node-resolve": "^3.3.0"
+  },
+  "scripts": {
+    "build": "npm run build:es && npm run build:cjs && npm run build:umd",
+    "build:cjs": "rollup --config ./config/rollup.config.cjs.js",
+    "build:umd": "rollup --config ./config/rollup.config.umd.js",
+    "build:es": "rollup --config ./config/rollup.config.js",
+    "watch:es": "rollup --config ./config/rollup.config.js --watch",
+    "watch:cjs": "rollup --config ./config/rollup.config.cjs.js --watch",
+    "clean": "rm -rf ./dist",
+    "test": "mocha"
+  }
+}
