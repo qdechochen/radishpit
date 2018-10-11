@@ -45,7 +45,7 @@ class Type {
       v = options.transform(v);
     }
     if (options.required) {
-      if (v === null || v === undefined || (options.type === 'string' && v === '') || (options.type === 'array' && v instanceof Array)) {
+      if (v === null || v === undefined || (options.type === 'string' && v === '') || (options.type === 'array' && v instanceof Array && v.length === 0)) {
         return ['required'];
       }
     } else if (v === null || v === undefined) {
