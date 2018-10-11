@@ -45,7 +45,7 @@ class Type {
       v = options.transform(v);
     }
     if (options.required) {
-      if (v === null || v === undefined || (options.type === 'string' && v === '')) {
+      if (v === null || v === undefined || (options.type === 'string' && v === '') || (options.type === 'array' && v instanceof Array && v.length === 0)) {
         return ['required'];
       }
     } else if (v === null || v === undefined) {
@@ -121,7 +121,6 @@ types.string = {
       }
     }
     if ({}.hasOwnProperty.call(options, 'min') && value.length < options.min) {
-      console.log(`adfsdlf:${value.length}:${options.min}`);
       return ['length_should_gt', options.min];
     }
     if (options.max && value.length > options.max) {
