@@ -1,9 +1,7 @@
 {
   "name": "radishpit",
   "description": "",
-  "version": "0.3.16",
-  "license": "MIT",
-  "repository": "",
+  "version": "1.0.1",
   "main": "./dist/index.js",
   "module": "./dist/index.es.js",
   "dependencies": {
@@ -34,5 +32,14 @@
     "watch:cjs": "rollup --config ./config/rollup.config.cjs.js --watch",
     "clean": "rm -rf ./dist",
     "test": "mocha"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qdechochen/o2sql.git"
+  },
+  "files": [
+    "dist"
+  ],
+  "author": "Echo Chen <qdechochen@gmail.com>",
+  "license": "ISC"
 }
