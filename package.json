@@ -7,7 +7,6 @@
   "dependencies": {
     "kind-of": "^6.0.2"
   },
-  "type": "module",
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
@@ -26,11 +25,11 @@
   },
   "scripts": {
     "build": "npm run build:es && npm run build:cjs && npm run build:umd",
-    "build:cjs": "rollup --config ./config/rollup.config.cjs.js",
-    "build:umd": "rollup --config ./config/rollup.config.umd.js",
-    "build:es": "rollup --config ./config/rollup.config.js",
-    "watch:es": "rollup --config ./config/rollup.config.js --watch",
-    "watch:cjs": "rollup --config ./config/rollup.config.cjs.js --watch",
+    "build:cjs": "rollup --config ./config/rollup.config.cjs.js --bundleConfigAsCjs",
+    "build:umd": "rollup --config ./config/rollup.config.umd.js --bundleConfigAsCjs",
+    "build:es": "rollup --config ./config/rollup.config.js --bundleConfigAsCjs",
+    "watch:es": "rollup --config ./config/rollup.config.js --bundleConfigAsCjs --watch",
+    "watch:cjs": "rollup --config ./config/rollup.config.cjs.js --bundleConfigAsCjs --watch",
     "clean": "rm -rf ./dist",
     "test": "mocha"
   },
