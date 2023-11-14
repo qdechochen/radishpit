@@ -1,7 +1,7 @@
 {
   "name": "radishpit",
   "description": "",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "./dist/index.js",
   "module": "./dist/index.es.js",
   "dependencies": {

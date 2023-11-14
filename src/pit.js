@@ -8,19 +8,18 @@ const superpit = (customTypes) => {
   }
 
   class Pit {
-    constructor(schema) {
+    constructor(schema, options = {}) {
+      const forceRequired = Array.isArray(options.forceRequired) ? options.forceRequired : {includes: () => !!options.forceRequired};
       Object.keys(schema).forEach((key) => {
         if (typeof schema[key] === 'string') {
           schema[key] = {
             type: schema[key],
           };
         }
-        if (schema[key].type.endsWith('?')) {
-          schema[key].required = false;
-          schema[key].type = schema[key].type.substring(0, schema[key].type.length - 1);
-        } else if (schema[key].required !== false) {
-          schema[key].required = true;
-        }
+        const required = forceRequired.includes(key) || ('required' in schema[key] ? schema[key].required : !schema[key].type.endsWith('?'));
+        const type = schema[key].type.slice(0, schema[key].type.endsWith('?') ? schema[key].type.length - 1 : undefined);
+        schema[key].required = required;
+        schema[key].type = type;
 
         if (!{}.hasOwnProperty.call(mixedTypes, schema[key].type)) {
           throw new Error(`[Radish-pit] type ${schema[key].type} is not defined`);
