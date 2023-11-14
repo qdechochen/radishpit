@@ -4,12 +4,14 @@ export default {
   input: 'src/index.js',
   output: {
     file: 'dist/index.es.js',
-    format: 'es'
+    format: 'es',
   },
-  plugins: [resolve({
-    customResolveOptions: {
-      moduleDirectory: 'node_modules'
-    }
-  })],
-  external: ['lodash']
+  plugins: [
+    resolve({
+      customResolveOptions: {
+        moduleDirectory: 'node_modules',
+      },
+    }),
+  ],
+  external: ['lodash'],
 };

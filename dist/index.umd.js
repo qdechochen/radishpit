@@ -1,8 +1,8 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (factory((global.RadishPit = {})));
-}(this, (function (exports) { 'use strict';
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.RadishPit = {}));
+})(this, (function (exports) { 'use strict';
 
   var classCallCheck = function (instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -204,20 +204,22 @@
 
     var Pit = function () {
       function Pit(schema) {
+        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
         classCallCheck(this, Pit);
 
+        var forceRequired = Array.isArray(options.forceRequired) ? options.forceRequired : { includes: function includes() {
+            return !!options.forceRequired;
+          } };
         Object.keys(schema).forEach(function (key) {
           if (typeof schema[key] === 'string') {
             schema[key] = {
               type: schema[key]
             };
           }
-          if (schema[key].type.endsWith('?')) {
-            schema[key].required = false;
-            schema[key].type = schema[key].type.substring(0, schema[key].type.length - 1);
-          } else if (schema[key].required !== false) {
-            schema[key].required = true;
-          }
+          var required = forceRequired.includes(key) || ('required' in schema[key] ? schema[key].required : !schema[key].type.endsWith('?'));
+          var type = schema[key].type.slice(0, schema[key].type.endsWith('?') ? schema[key].type.length - 1 : undefined);
+          schema[key].required = required;
+          schema[key].type = type;
 
           if (!{}.hasOwnProperty.call(mixedTypes, schema[key].type)) {
             throw new Error('[Radish-pit] type ' + schema[key].type + ' is not defined');
@@ -275,9 +277,7 @@
 
   var pit = superpit();
 
-  exports.superpit = superpit;
   exports.pit = pit;
+  exports.superpit = superpit;
 
-  Object.defineProperty(exports, '__esModule', { value: true });
-
-})));
+}));

@@ -1,12 +1,13 @@
 {
   "name": "radishpit",
   "description": "",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "./dist/index.js",
   "module": "./dist/index.es.js",
   "dependencies": {
     "kind-of": "^6.0.2"
   },
+  "type": "module",
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",

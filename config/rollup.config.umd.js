@@ -1,6 +1,6 @@
 import babel from 'rollup-plugin-babel'
 
-import config from './rollup.config';
+import config from './rollup.config.js';
 
 config.plugins.push(
   babel({
